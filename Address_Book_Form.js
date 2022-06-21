@@ -57,8 +57,28 @@ window.addEventListener("DOMContentLoaded", (event) => {
     });
   
   });
+  const save = () => {
+    try {
+      let contact = createContact();
+      createAndUpdateStorage(contact);
+    } catch (error) {
+      alert(error);
+    }
+  };
+  //local storage
+  const createAndUpdateStorage = (contact) => {
+    let contactList = JSON.parse(localStorage.getItem("ContactList"));
+    if (contactList != undefined) {
+      contactList.push(contact);
+    } else {
+      contactList = [contact];
+    }
+    alert(contact.toString());
+    alert("Contact Added Sucessfully");
+    localStorage.setItem("ContactList", JSON.stringify(contactList));
+  }
   
-  function save() {
+  const createContact = () => {
     let contact = new Contact();
     contact.id = new Date().getTime();
   
@@ -82,7 +102,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       setTextValue(".address-error", error);
       throw error;
     }
-    
+  
     let city = getInputValueById("#city");
     if (city != "Select City") {
       contact.city = city;
@@ -104,7 +124,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
       throw error;
     }
   
-    console.log(contact.toString());
+    alert(contact.toString());
+    return contact;
   }
   
   const setTextValue = (id, value) => {
@@ -112,7 +133,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     element.textContent = value;
   };
   
-  function getInputValueById(property) {
+  const getInputValueById = (property) => {
     let value = document.querySelector(property).value;
     return value;
-  }
+  };
