@@ -1,5 +1,5 @@
 const nameRegex = RegExp("^[A-Z]{1}[A-Za-z\\s]{2,}$");
-const phoneNumberRegex = RegExp("^([1-9]+[0-9]+)\\s{0,1}[0-9]{10}$");
+const phoneNumberRegex = RegExp("^([+][1-9]{2}[ ])?([0-9]{10})$");
 const zipRegex = RegExp("^[0-9]{3}\\s{0,1}[0-9]{3}$");
 
 class Contact {
